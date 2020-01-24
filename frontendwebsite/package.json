@@ -33,7 +33,7 @@
     "nodemailer-sendmail-transport": "^1.0.2",
     "nodemon": "^1.12.1",
     "normalize.scss": "^0.1.0",
-    "npm": "^5.7.1",
+    "npm": "^6.13.4",
     "objectid": "^3.2.1",
     "popper.js": "^1.12.5",
     "sendmail": "^1.2.0",
