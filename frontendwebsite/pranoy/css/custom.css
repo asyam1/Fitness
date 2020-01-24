@@ -1,0 +1,538 @@
+body {
+  background-color: #26333c;
+}
+
+.page{
+	padding:0;
+	height: 100%;
+	width: 100%;
+}
+
+.rheight{
+	height: 100vh;
+}
+
+.title{
+	color: white;
+	font-size: 60px;
+	text-align: center;
+	height: 100%;
+	padding-top: 22%;
+}
+
+.titleicon{
+	color: white;
+}
+
+.iticon{
+	color: white;
+	font-size: 45px;
+	padding-left: 3%;
+}
+
+.login{
+	height: 100%;
+	padding-top: 20%;
+}
+
+.register{
+	height: 100%;
+	padding-top: 10%;
+}
+
+.spacing{
+	padding-bottom: 5%;
+ }
+
+.spacingfrgtpwd{
+	padding-left: 5%;
+}
+
+.aligninputbox{
+	padding-left: 5%
+}
+
+.userfa{
+	color: #6ed9a1;
+}
+
+.register input[type="text"], .register input[type="password"] {
+	background-color: #303e47;
+	width: 90%;
+	height: 60px;
+	border: 1px solid #6ed9a1;
+	border-radius: 0px;
+	font-size: 16px;
+	transition: all 0.1s linear;
+}
+
+.register input[placeholder]{
+	text-align: center;
+	color: white;
+}
+
+.register select{
+	background-color: #303e47;
+	width: 95%;
+	height: 80px;
+	border: 1px solid #6ed9a1;
+	border-radius: 0px;
+	font-size: 16px;
+	transition: all 0.1s linear;
+	color: #5b6c72;
+}
+
+.register option{
+	background-color: #303e47;
+	width: 95%;
+	height: 80px;
+	border: 1px solid #6ed9a1;
+	border-radius: 0px;
+	font-size: 16px;
+	transition: all 0.1s linear;
+	color: #5b6c72;
+}
+
+.login input[type="text"], .login input[type="password"] {
+	background-color: #303e47;
+	width: 90%;
+	height: 60px;
+	border: 1px solid #6ed9a1;
+	border-radius: 0px;
+	font-size: 16px;
+	transition: all 0.1s linear;
+}
+
+.login input:hover,
+.login input:focus {
+	outline:none;
+	box-shadow: none;
+	border: 2px solid #6ed9a1;
+}
+
+.login input[placeholder]{
+	text-align: center;
+	color: white;
+}
+
+.btn-login {
+	background-color: #6ed9a1;
+	outline: none;
+	color: #26333c;
+	font-size: 14px;
+	width: 90%;
+	height: auto;
+	font-weight: normal;
+	padding: 14px 0;
+	text-transform: uppercase;
+	border-radius: 35px;
+}
+
+.btn-forgot {
+	background-color: #dd5858;
+	outline: none;
+	color: #26333c;
+	font-size: 14px;
+	width: 90%;
+	height: auto;
+	font-weight: normal;
+	padding: 14px 0;
+	text-transform: uppercase;
+	border-radius: 35px;
+}
+
+.loginerror{
+	padding-top: 20%;
+	padding-left: 5%;
+	padding-right: 5%;
+	height: 100%;
+}
+
+.loginerror input[type="text"], .loginerror input[type="password"] {
+	background-color: #303e47;
+	width: 90%;
+	height: 60px;
+	border: 1px solid red;
+	border-radius: 0px;
+	font-size: 16px;
+	transition: all 0.1s linear;
+}
+
+.loginerror input:hover,
+.loginerror input:focus {
+	outline:none;
+	box-shadow: none;
+	border: 2px solid #6ed9a1;
+}
+
+.loginerror input[placeholder]{
+	text-align: center;
+	color: white;
+}
+
+.btn-loginerror {
+	background-color: red;
+	outline: none;
+	color: #26333c;
+	font-size: 14px;
+	width: 90%;
+	height: auto;
+	font-weight: normal;
+	padding: 14px 0;
+	text-transform: uppercase;
+	border-radius: 35px;
+}
+
+.btn-loginerror :active{
+	background-color: red;
+}
+
+.userRed{
+	color: red;
+}
+
+.loginsuccess{
+	padding-top: 27%;
+	padding-left: 5%;
+	padding-right: 5%;
+	padding-bottom: 22%;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.vline [class*='col-']:not(:last-child):after {
+  	background: white;
+  	width: 1px;
+  	content: "";
+  	display:block;
+  	position: absolute;
+  	top:0;
+  	bottom: 0;
+  	right: 0;
+  	height: 80%;
+  	margin: auto;
+}
+
+.vlineo [class*='col-']:not(:last-child):after {
+  	width: 0px;
+  	content: "";
+  	display:block;
+  	position: absolute;
+  	top:0;
+  	bottom: 0;
+  	right: 0;
+  	height: 80%;
+  	margin: auto;
+}
+
+.ititle{
+	height: 10vh;
+	background-color: #f15a24;
+}
+
+.trmenu{
+	text-align: right;
+	color: white;
+	font-size: 45px;
+	height: 10vh;
+}
+
+.icon-bar {
+    width: 100%; /* Full-width */
+    overflow: auto; /* Overflow due to float */
+    height: 10vh;
+}
+
+.icon-bar a {
+	height: 10vh;
+    float: left; /* Float links side by side */
+    text-align: center; /* Center-align text */
+    width: 25%; /* Equal width (5 icons with 20% width each = 100%) */
+    padding: 12px 0; /* Some top and bottom padding */
+    transition: all 0.3s ease; /* Add transition for hover effects */
+    color: white; /* White text color */
+    font-size: 35px; /* Increased font size */
+}
+
+.icon-bar a:hover {
+    background-color: #253b49; /* Add a hover color */
+}
+
+.sidebar{
+	background-color: #3B474F;
+	width: 10%;
+	height: 90vh;
+}
+
+.list{
+	background-color: #3B474F;
+	color: white;
+	list-style-type: none;
+	text-align: center;
+	padding-top: 7%;
+	padding-bottom:7%;
+	margin-top:60%;
+	font-size: 40px;
+}
+
+.list:hover{
+	background-color: #26333c
+}
+
+.list i{
+	color: white;
+}
+
+.xlbox{
+	background-color: white;
+	width: 50%;
+	height: 100%;
+	margin-top: 10%;
+	margin-left: 10%;
+	padding-top: 10%;
+	overflow: auto;
+}
+
+.lgbox{
+	background-color: white;
+	width: 80%;
+	height: 70vh;
+	margin-top: 10%;
+	margin-left: 10%;
+}
+
+.mdbox{
+	background-color: white;
+	width: 80%;
+	height: 20vh;
+	margin-top: 12%;
+}
+
+.smbox{
+	background-color: white;
+	width: 60%;
+	height: 20vh;
+	margin-top: 12%;
+}
+
+.avatar{
+	border-radius: 50%;
+	height: 90%;
+	width: 15%;
+	display:block;
+	margin: 0 auto;
+	padding-top: 2%;
+	padding-bottom: 2%;
+}
+
+.avatarRow{
+	margin: auto;
+	height: 50%;
+	width: 100%;
+}
+
+.info{
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.titlesUinfo{
+	font-size: 50px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+}
+
+.valuesUinfo{
+	font-size: 30px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: steelblue;
+}
+
+.pwdError{
+	color: red;
+}
+
+.plain{
+	background-color: white; 
+}
+
+#chronoExample{
+	text-align: center;
+	padding-top: 3%;
+}
+
+.values{
+	font-size: 60px;
+}
+
+.dateTime{
+	font-size: 60px;
+}
+
+/*tablets landscape*/
+@media only screen 
+and (min-width : 768px) 
+and (max-width : 1024px) 
+and (orientation : landscape) { 
+	
+	.title{
+		font-size: 50px;
+		padding-top: 25%;
+		}
+
+	.loginsuccess{
+		padding-top: 31%;
+	}
+
+	.trmenu{
+		font-size: 30px;
+	}
+
+	.list{
+		font-size: 30px;
+	}
+
+	.lgbox{
+		margin-top: 15%;
+		margin-left: 10%;
+	}
+
+	.mdbox{
+		height: 20vh;
+		margin-top: 18%;
+	}
+
+	.smbox{
+		margin-top: 18%;
+	}
+
+	.iticon{
+		color: white;
+		font-size: 50px;
+		padding-left: 3%;
+	}
+
+	#chronoExample{
+		text-align: center;
+		padding-top: 0%;
+	}
+	
+	.values{
+		font-size: 40px;
+	}
+
+}
+
+/*tablets portrait*/
+@media only screen 
+and (max-width : 1023px) { 
+	
+	.rheight{
+		height:100%;
+	}
+
+	.title{
+		font-size: 40px;
+	}
+
+	.loginerror{
+		padding-left: 5%;
+		padding-right: 5%;
+	}
+
+	.aligninputbox{
+		padding-left: 9%;
+	}
+
+	.vline [class*='col-']:not(:last-child):after{
+		width: 0px;
+	}
+
+	.ititle, .trmenu, .sidebar{
+		display: none;
+	}
+
+	.lgbox{
+		height: 60vh;
+	}
+
+	.mdbox{
+		margin-left: 10%
+	}
+
+	.smbox{
+		margin-left: 20%;
+		margin-bottom: 10%
+	}
+}
+
+/*big phones*/
+@media only screen 
+and (max-width : 767px) 
+and (orientation : portrait) { 
+	
+	.rheight{
+		height:100%;
+	}
+
+	.title{
+		font-size: 35px;
+		text-align: center;
+		padding-bottom: 15%;
+	}
+
+	.loginsuccess{
+		padding-top: 40%;
+	}
+
+	.aligninputbox{
+		padding-left: 9%;
+	}
+
+	.userfa{
+		font-size: 30px;
+	}
+
+	.vline [class*='col-']:not(:last-child):after{
+		width: 0px;
+	}
+
+	.lgbox{
+		height: 65vh;
+	}
+
+	.smbox{
+		width: 60%;
+		height: 20vh;
+		margin-top: 12%;
+	}
+}
+
+/*small phones*/
+@media only screen 
+and (max-width : 400px) 
+and (orientation : portrait) { 
+	
+	.rheight{
+		height:100%;
+	}
+
+	.title{
+		font-size: 26px;
+		text-align: center;
+		padding-bottom: 5%;
+	}
+
+	.loginsuccess{
+		padding-top: 40%;
+	}
+
+	.vline [class*='col-']:not(:last-child):after{
+		width: 0px;
+	}
+}

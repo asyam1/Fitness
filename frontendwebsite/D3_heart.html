@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+<head>
+	<title>Adith Syam's Website</title>
+	
+	<!-- Load d3.js -->
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<!-- <script src="C3/c3.min.js"></script> -->
+	<!-- <script src="PapaParse/papaparse.min.js"></script> -->
+
+	<style> /* set the CSS */
+
+	svg .axis {
+			font-size: 12px;
+		}
+
+	svg .axis path {
+			display: none;
+		}
+
+	</style>
+
+</head>
+<body>
+
+	 
+	<script>
+
+	//declaring the variables
+
+	
+	var SECONDS_SAMPLE = 5;
+	var BEAT_TIME = 400;
+	var BEAT_VALUES = [0, 0, 3, -4, 10, -7, 3, 0, 0];
+	var data = [];
+	
+
+// this function assignes the BEAT_VALUES into data[]
+    function beat() {
+    			
+    			var now = new Date();//
+				var nowTime = now.getTime();//
+
+  				data.push({
+  					date: now,
+  					value: 0
+  				});
+
+
+  				var step = BEAT_TIME / BEAT_VALUES.length - 2;
+
+  				console.log(step);
+
+  				for (var i = 1; i < BEAT_VALUES.length; i++) {
+  					data.push({
+  						date: new Date(nowTime + i * step),
+  						value: BEAT_VALUES[i]
+  					});
+  				}
+  				console.log(data);
+	}
+
+// function beat ends
+
+				
+
+//the svg
+
+				
+	var margin = {top: 10, right: 10, bottom: 20, left: 50};
+	var width = 1200;
+	var height = 700;
+
+			// Add an SVG element with the desired dimensions and margin.
+	var svg = d3.select("body").append("svg")
+							.attr("width", 450)
+							.attr("height", 118)
+							
+							
+
+				 
+  	//fromdate gets the current time so the the domain for x is set
+  	var now = new Date();
+  	var fromDate = new Date(now.getTime() - SECONDS_SAMPLE * 1000);
+
+
+  	
+				
+	//the scales 
+
+	var xScale = d3.scaleTime()
+					.domain([fromDate, new Date(now.getTime())])
+					.range([0, (800)]);
+
+	var yScale = d3.scaleLinear()
+					.domain([10, -20])
+					.range([ 0, 100]);
+
+	var xAxis = d3.axisBottom(xScale)
+					.ticks(d3.timeSecond, 1)
+					.tickFormat(function(d) {
+						var seconds = d.getSeconds() === 0 ? "00" : d.getSeconds();
+						return seconds % 10 === 0 ? d.getMinutes() + ":" + seconds : ":" + seconds;
+					});
+
+	var yAxis = d3.axisLeft(yScale);
+
+
+			//creating a line over the scatterpoints 
+
+	var line = d3.line().x(function(d) {  return xScale(d.date); })
+						.y(function(d) {  return yScale(d.value); })
+						.curve(d3.curveCatmullRom.alpha(0.5));
+
+
+			//creating the axis and calling them
+	var axis = d3.select("svg").append("g")
+					.attr('transform', 'translate(10, 100)')
+					.classed('x axis', true)
+					.call(xAxis);
+
+	var path = svg.append("g")
+					.append("path")
+					.attr("class", "line");
+    
+	// y axis is not called, uncomment it to see on the graph
+	svg.select("svg").append("g")
+				.attr('transform', 'translate(60, 0)')
+				.classed('y axis', true)
+				//.call(yAxis);
+						
+	//appending the line 
+	svg.select(".line")
+                .attr("class", "line")
+                .attr("d", line(data));
+                
+
+	var transition = d3.select('path').transition()
+						.duration(100)
+						.ease(d3.easeLinear);
+
+//redrawing the line
+
+// tick function draws the line as-well-as moves the xAxis with the new domin
+		setInterval(function tick() {
+
+        transition = transition.each(function() {
+
+          // update the domains
+          now = new Date();
+          fromDate = new Date(now.getTime() - SECONDS_SAMPLE * 2000);
+          // new domain
+          xScale.domain([fromDate, new Date(now.getTime()) ]); // speed of the tick
+
+          var translateTo = xScale(new Date(fromDate.getTime()) ); // speed of tick
+
+          // redraw the line
+          svg.select(".line")
+              .attr("d", line(data))
+              .attr("transform", null)
+              .transition()
+              .attr("transform", "translate(" + translateTo + ")")
+              .attr("fill", "none")
+              .attr("stroke", "black")
+              .attr("stroke-width", "1.5px")
+
+          // slide the x-axis left
+
+          axis.call(xAxis);// plain calling the axis again 
+
+        });
+      	});
+
+		// calling the beat function
+      	setInterval(function() {
+				beat();
+			}, 2000); // selecting the timing of the beat
+		
+		beat();
+
+	</script>
+
+</body>
+</html>

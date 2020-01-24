@@ -1,0 +1,271 @@
+<!doctype html>
+<html>
+<head>
+	<title>Adith Syam's Website</title>
+	
+	<!-- Load d3.js -->
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+
+	<style> /* set the CSS */
+
+	svg .axis {
+			font-size: 12px;
+		}
+
+	svg .axis path {
+			display: none;
+		}
+
+	</style>
+
+</head>
+<body>
+
+	 
+	<script>
+
+	//declaring the local variables
+
+	
+  	var acc_x = [];
+  	var acc_y = [];
+  	var acc_z = [];
+  	var index = 0;
+	var SECONDS_SAMPLE = 5;
+	var BEAT_TIME = 500; // beat time sets the point occurance, 500 ms = 0.5 sec
+	var data_x = [];
+	var data_y = [];
+	var data_z = [];
+	var margin = {top: 10, right: 10, bottom: 20, left: 50};
+
+	//parsing the data 
+        
+    function parse(data){
+        data.acceleration_x = parseFloat(data.acceleration_x);
+        data.acceleration_y = parseFloat(data.acceleration_y);
+        data.acceleration_z = parseFloat(data.acceleration_z);
+        return data;
+    }
+
+
+
+
+// this function assignes the parsed values into data[]
+    
+function beat() {
+    	index++;
+
+    //uploading the file 
+    var csv = d3.csv("./random.csv", parse, function (csv_data){
+    	csv_data.forEach(function (data){
+             
+            acc_x.push(data.acceleration_x);//pushing the value from the csv into the array
+            acc_y.push(data.acceleration_y);
+            acc_z.push(data.acceleration_z);
+
+        });
+    });
+
+    console.log(acc_x);
+    
+    			
+    			var now = new Date();
+				var nowTime = now.getTime();// getting the current time and we set this time to the data array so each value will 
+											// have the current time as well
+
+				//looping to push all the values from each acc to their assigned 
+
+  				for (var i = 0; i < acc_x.length ; i++) {
+  					data_x.push({
+  						date: new Date(nowTime + i * BEAT_TIME),
+  						value: acc_x[i]
+  					});
+  				}
+
+  				for (var i = 0; i < acc_y.length ; i++) {
+  					data_y.push({
+  						date: new Date(nowTime + i * BEAT_TIME),
+  						value: acc_y[i]
+  					});
+  				}
+
+  				for (var i = 0; i < acc_z.length ; i++) {
+  					data_z.push({
+  						date: new Date(nowTime + i * BEAT_TIME),
+  						value: acc_z[i]
+  					});
+  				}
+
+
+  				console.log(data_x);
+  				console.log(data_y);
+  				console.log(data_z);
+	}	
+	// function beat ends
+		
+
+	//the svg
+	// Add an SVG element with the desired dimensions and margin.
+	var svg = d3.select("body").append("svg")
+							.attr("width", '100%')
+							.attr("height", 500)
+
+				 
+  	//fromdate gets the current time so the the domain for x is set
+
+  	var now = new Date();
+  	var fromDate = new Date(now.getTime() - SECONDS_SAMPLE * 1000);
+			
+	//the scales for X and Y inorder to plot the points
+
+	var xScale = d3.scaleTime()
+					.domain([fromDate, new Date(now.getTime() )])
+					.range([0, 800]);
+
+	var yScale = d3.scaleLinear()
+					.domain([60, -10])
+					.range([ 0, 400]);
+
+	// these function sets the xScale and yScale to the potion and their format
+	
+	var xAxis = d3.axisBottom(xScale)
+					.ticks(d3.timeSecond, 1)
+					.tickFormat(function(d) {
+						var seconds = d.getSeconds() === 0 ? "00" : d.getSeconds();
+						return seconds % 10 === 0 ? d.getMinutes() + ":" + seconds : ":" + seconds;
+					});
+
+	var yAxis = d3.axisLeft(yScale);
+
+
+	//creating a line  
+
+	var line = d3.line().x(function(d) {  return xScale(d.date); })
+						.y(function(d) {  return yScale(d.value); })
+						.curve(d3.curveCatmullRom.alpha(0.5));
+
+
+	//creating the axis and calling them
+	var axis = d3.select("svg").append("g")
+					.attr('transform', 'translate(10, 400)')//to change the position of the x scale
+					.classed('x axis', true)
+					.call(xAxis);
+
+	//appending each path with the lines
+
+	var path_x = svg.append("g")
+					.append("path")
+					.attr("class", "line_x");
+
+
+
+	var path_y = svg.append("g")
+					.append("path")
+					.attr("class", "line_y");
+
+
+	var path_z = svg.append("g")
+					.append("path")
+					.attr("class", "line_z");
+    
+	// y axis is not called, uncomment it to see on the graph
+	
+	svg.select("svg").append("g")
+				.attr('transform', 'translate(60, 0)')//to change the position of the y scale 
+				.classed('y axis', true)
+				//.call(yAxis);
+
+	// this variable takes all the path containing the line 
+	var transition = d3.select('path').transition()
+						.duration(100)
+						.ease(d3.easeLinear);	
+
+	//appending the line 
+	svg.select(".line_x")
+                .attr("d", line(data_x));
+                
+    svg.select(".line_y")
+                .attr("d", line(data_y));
+               
+    svg.select(".line_z")
+                .attr("d", line(data_z));
+                
+                
+                
+                
+
+	
+
+	//redrawing the line
+
+	// tick function draws the line as-well-as moves the xAxis with the new domin
+	setInterval(function tick() {
+
+        transition = transition.each(function() {
+
+          // update the domains
+          now = new Date();
+          fromDate = new Date(now.getTime() - SECONDS_SAMPLE * 1000);
+          // new domain
+          xScale.domain([fromDate, new Date(now.getTime())  ]); // speed of the tick
+
+          var translateTo = xScale(new Date(fromDate.getTime()) ); // speed of tick
+
+          // redraw the lines
+
+          svg.select(".line_x")
+              .attr("d", line(data_x))
+              .attr("transform", null)
+              .transition()
+              .attr("transform", "translate(" + translateTo + ")")
+              .attr("fill", "none")
+              .attr("stroke", "blue")
+              .attr("stroke-width", "1.5px");
+
+        svg.select(".line_y")
+              .attr("d", line(data_y))
+              .attr("transform", null)
+              .transition()
+              .attr("transform", "translate(" + translateTo + ")")
+              .attr("fill", "none")
+              .attr("stroke", "black")
+              .attr("stroke-width", "1.5px");
+
+        svg.select(".line_z")
+              .attr("d", line(data_z))
+              .attr("transform", null)
+              .transition()
+              .attr("transform", "translate(" + translateTo + ")")
+              .attr("fill", "none")
+              .attr("stroke", "red")
+              .attr("stroke-width", "1.5px");
+
+
+          // slide the x-axis left
+
+          axis.call(xAxis);// plain calling the axis again 
+
+        });
+
+    });
+
+		
+		
+
+		
+
+ 	// calling the beat function
+    var loop = setInterval(function() {
+				beat();
+		if (index == 2)
+				clearInterval(loop);
+	},100); // selecting the timing of the beat
+
+		
+		
+
+
+	</script>
+
+</body>
+</html>

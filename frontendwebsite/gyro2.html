@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<style type="text/css">
+/* 13. Basic Styling with CSS */
+
+/* Style the lines by removing the fill and applying a stroke */
+svg .axis {
+            font-size: 7px;
+        }
+.line {
+    fill: none;
+    stroke: #ffab00;
+    stroke-width: 3;
+}
+
+/* Style the dots by assigning a fill and stroke */
+.dot {
+    fill: #ffab00;
+    stroke: #090808;
+}
+
+</style>
+<!-- Body tag is where we will append our SVG and SVG objects-->
+<body>
+</body>
+
+<!-- Load in the d3 library -->
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script type="text/javascript" src="appserver.js"></script>
+<script>
+var random = [];
+var data = [];
+
+/*
+//Reading data
+var test = setInterval(function(){
+d3.text("random.txt", function(text) {
+    data = d3.csvParseRows(text).map(function(row) {
+    return row.map(function(value) {
+      return +value;
+    });
+  });
+  //console.log(data);
+}); 
+
+});
+//console.log(random);
+*/
+ //sample array
+ var x = getX();
+ var y = getY();
+var i = 7;
+var loop = setInterval(function() {
+    i = i+2;
+    random[0] = ({
+        x_axis: x,
+        y_axis: y
+    });
+
+    var circle = svg.selectAll(".dot")
+                    .data(random);
+
+    
+
+    // 12. Appends a circle for each datapoint 
+    circle.enter().append("circle") // Uses the enter().append() method
+        .attr("class", "dot") // Assign a class for styling
+        .attr("r", 5)
+        .merge(circle)
+        .attr("cx", function(d) { return xScale(d.x_axis); })
+        .attr("cy", function(d) { return yScale(d.y_axis); });
+
+    circle
+        .exit().transition()
+        .attr("r", 0)
+        .remove();
+    
+},35);
+// 2. Use the margin convention practice 
+var margin = {top: 10, right: 10, bottom: 10, left: 10}
+  , width = window.innerWidth - margin.left - margin.right // Use the window's width 
+  , height = window.innerHeight - margin.top - margin.bottom; // Use the window's height
+
+
+
+// 5. X scale will use the index of our data
+var xScale = d3.scaleLinear()
+    .domain([-100, 100]) // input
+    .range([0, 200]); // output
+
+// 6. Y scale will use the randomly generate number 
+var yScale = d3.scaleLinear()
+    .domain([-100, 100]) // input 
+    .range([200, 0]); // output 
+
+
+// 7. d3's line generator
+var line = d3.line()
+    .x(function(d, i) { return xScale(d.x_axis); }) // set the x values for the line generator
+    .y(function(d, i) { return yScale(d.y_axis); }) // set the y values for the line generator 
+    .curve(d3.curveMonotoneX) // apply smoothing to the line
+
+
+
+// 1. Add the SVG to the page and employ #2
+var svg = d3.select("body").append("svg")
+    .attr("width", 300)
+    .attr("height", 300)
+    .append("g")
+    .attr("transform", "translate(" + (margin.left)/2 + "," + (margin.top)/2 + ")");
+
+
+// 9. Append the path, bind the data, and call the line generator 
+svg.append("path")
+    .data(random)
+    .attr("class", "line") // Assign a class for styling 
+    .attr("d", line); // 11. Calls the line generator 
+    
+
+
+    
+
+// 3. Call the x axis in a group tag
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + 200/2 + ")")
+    .call(d3.axisBottom(xScale)); // Create an axis component with d3.axisBottom
+
+// 4. Call the y axis in a group tag
+svg.append("g")
+    .attr("class", "y axis")
+    .attr("transform", "translate("+ 200/2 +", 0)")
+    .call(d3.axisLeft(yScale)); // Create an axis component with d3.axisLeft
+
+
+   
+
+</script>

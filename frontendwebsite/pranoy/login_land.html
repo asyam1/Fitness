@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Your Company Name</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+  </head>
+
+  <body>
+  	<div class="container-fluid page">
+  		<div class="row rheight no-gutters vline">
+  			<div class="col-lg-7 title">
+  				<i class="fa fa-heartbeat fa-3x titleicon"></i>
+  				Your Company
+  			</div>
+  			<div class="col-lg-5 login">
+  				<div class="row no-gutters spacing">
+  					<div style="text-align: center" class="col-lg-12 col-centered">
+  						<i class="fa fa-user fa-5x userfa"></i>
+  					</div>
+  				</div>
+				<form id="login-form" action="/" method="post" role="form" style="display: block;">
+					<div class="row no-gutters aligninputbox vlineo">
+						<div class="col-lg-6 col-centered spacing">
+							<div class="form-group">
+								<input type="text" class="form-control input-lg" id="username" name="username" placeholder="USERNAME" required>
+							</div>
+						</div>
+						<div class="col-lg-6 col-centered spacing">
+  							<div class="form-group">
+  								<input type="password" class="form-control input-lg" id="pwd" name="pwd" placeholder="PASSWORD" required>
+  							</div>
+  						</div>
+					</div>
+  					<div class="row no-gutters">
+  						<div class="col-lg-12 col-centered">
+  							<div class="form-group">
+  								<button type="submit" class="form-control btn btn-login">LOG IN</button>
+  							</div>
+  						</div>
+  					</div>
+				</form>
+				<br>
+				<div class="row no-gutters">
+					<div class="col-lg-12 col-centered">
+						<form action="./register.vue">
+							<button type="submit" class="form-control btn btn-login">Register</button>
+						</form>
+					</div>
+				</div>
+			</br>
+			</br>
+				<div class="row no-gutters">
+					<div class="col-lg-12 col-centered">
+						<form action="./forgotPassword.vue">
+							<button type="submit" class="form-control btn btn-forgot">Forgot Password</button>
+						</form>
+					</div>
+				</div> 
+  			</div>
+  		</div>
+  	</div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>  
+  </body>
+</html>

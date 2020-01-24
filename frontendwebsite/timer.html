@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link href="./pranoy/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./pranoy/css/custom.css" rel="stylesheet">
+    </head>
+    <body class="plain">
+        <div id="chronoExample">
+            <div class="values">00:00:00</div>
+                <div>
+                   <button class="startButton btn btn-success btn-lg">Start</button>
+                    <button class="pauseButton btn btn-primary btn-lg" >Pause</button>
+                    <button class="stopButton btn btn-danger btn-lg">Stop</button>
+                    <button class="resetButton btn btn-warning btn-lg">Reset</button>
+                </div>
+            </div>
+    </body>
+</html>
+
+<script src="./node_modules/easytimer.js/dist/easytimer.min.js"></script>
+<script src="./pranoy/js/jquery-3.2.1.min.js"></script>
+<script>
+var timer = new Timer();
+
+$('#chronoExample .startButton').click(function () {
+    timer.start();
+});
+$('#chronoExample .pauseButton').click(function () {
+    timer.pause();
+});
+$('#chronoExample .stopButton').click(function () {
+    timer.stop();
+});
+$('#chronoExample .resetButton').click(function () {
+    timer.reset();
+});
+timer.addEventListener('secondsUpdated', function (e) {
+    $('#chronoExample .values').html(timer.getTimeValues().toString());
+});
+timer.addEventListener('started', function (e) {
+    $('#chronoExample .values').html(timer.getTimeValues().toString());
+});
+timer.addEventListener('reset', function (e) {
+    $('#chronoExample .values').html(timer.getTimeValues().toString());
+});
+</script>

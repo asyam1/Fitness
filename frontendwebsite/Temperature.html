@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+ 
+<body><!-- Odometr includes -->
+<link rel="stylesheet" href="http://github.hubspot.com/odometer/themes/odometer-theme-car.css" />
+<script src="http://github.hubspot.com/odometer/odometer.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<!-- Extra styles for this example -->
+<style>
+.odometer {
+	font-size: 30px;
+	margin-left: 20%;
+}
+</style>
+<img src="/temp.png" style="width:40%; height:40%; margin-left: 30%"></img>
+<div id="odometer" class="odometer">0rs</div>
+
+<script>
+	var random = [];
+	var data = [];
+
+	//Reading data
+var test = setInterval(function(){
+
+	d3.text("random.txt", function(text) {
+		data = d3.csvParseRows(text).map(function(row) {
+		return row.map(function(value) {
+		return +value;
+		});
+	});
+	//console.log(data);
+	
+
+	}); 
+});
+var j = 0;
+var temp = 0;
+var value = 0;
+
+	var loop = setInterval(function() {
+	    j = j+2
+	    random[0] = data[j][4];
+
+		setInterval(function(){
+			
+			odometer.innerHTML = random[0];
+				
+		}, 100);
+	},100);
+
+
+</script>
+
+</body>
