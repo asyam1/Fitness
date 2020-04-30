@@ -22,7 +22,7 @@
     "express-json": "^1.0.0",
     "express-vue": "^4.0.11",
     "file": "^0.2.2",
-    "jquery": "^3.2.1",
+    "jquery": "^3.5.0",
     "mongodb": "^2.2.34",
     "my-local-ip": "^1.0.0",
     "net": "^1.0.2",
